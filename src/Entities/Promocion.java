@@ -1,6 +1,6 @@
 package Entities;
 
-import Enums.TipoPromocion;
+import Entities.Enums.TipoPromocion;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

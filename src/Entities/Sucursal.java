@@ -1,14 +1,15 @@
 package Entities;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Sucursal extends Base{
     private String nombre;
     private LocalTime horarioApertura;
     private LocalTime horarioCierre;
     private ArrayList<Empresa> listaEmpresas;
-    private ArrayList<Promocion> listaPromociones;
+    private Set<Promocion> listaPromociones;
 
     public Sucursal() {
     }
@@ -17,8 +18,8 @@ public class Sucursal extends Base{
         this.nombre = nombre;
         this.horarioApertura = horarioApertura;
         this.horarioCierre = horarioCierre;
-        this.listaEmpresas = new ArrayList<>();
-        this.listaPromociones = new ArrayList<>();
+        this.listaEmpresas = new HashSet<>();
+        this.listaPromociones = new HashSet<>();
     }
     public void agregarEmpresa(Empresa empresa) {
         this.listaEmpresas.add(empresa);

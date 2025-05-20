@@ -4,6 +4,7 @@ public class Empresa extends Base{
     private String nombre;
     private String razonSocial;
     private int cuil;
+    private Sucursal sucursal;
 
     public Empresa() {
     }
@@ -23,5 +24,25 @@ public class Empresa extends Base{
 
     public String getNombre() {
         return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setRazonSocial(String razonSocial) {
+        this.razonSocial = razonSocial;
+    }
+
+    public void setCuil(int cuil) {
+        this.cuil = cuil;
+    }
+
+    public Sucursal getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(Sucursal sucursal) {
+        this.sucursal = sucursal;
     }
 }

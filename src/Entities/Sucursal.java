@@ -8,7 +8,7 @@ public class Sucursal extends Base{
     private String nombre;
     private LocalTime horarioApertura;
     private LocalTime horarioCierre;
-    private ArrayList<Empresa> listaEmpresas;
+    private Set<Empresa> listaEmpresas;
     private Set<Promocion> listaPromociones;
 
     public Sucursal() {

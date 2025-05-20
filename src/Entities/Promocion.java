@@ -5,6 +5,8 @@ import Entities.Enums.TipoPromocion;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Promocion {
     private String denominacion;
@@ -15,7 +17,8 @@ public class Promocion {
     private String descripcion;
     private double precioPromocional;
     private TipoPromocion tipoPromocion;
-    private ArrayList<Imagen> imagenes;
+    private Set<Imagen> imagenes;
+    private Set<Articulo> artiulosEnPromocion;
 
     public Promocion() {
     }
@@ -29,6 +32,7 @@ public class Promocion {
         this.fechaHasta = fechaHasta;
         this.fechaDesde = fechaDesde;
         this.denominacion = denominacion;
-        this.imagenes = new ArrayList<>();
+        this.imagenes = new HashSet<>();
+        this.artiulosEnPromocion = new HashSet<>();
     }
 }

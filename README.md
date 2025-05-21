@@ -4,7 +4,7 @@
 
 **Profesora:** Cinthia Rigoni
 
-**Alumnos (por orden alfabético):**
+**Integrantes:**
 * Aciar, Agustín
 * Flores, Leandro
 * Ramírez, Rodrigo

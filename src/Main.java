@@ -57,5 +57,59 @@ public class Main {
         System.out.println("Cantidad: " + detalle.getCantidad());
         System.out.println("Total pedido: $" + pedido.getTotal());
         System.out.println("Factura generada - Total venta: $" + factura.getTotalVenta());
+
+
+        System.out.println("-----------------------------------------------------------------------");
+
+
+        System.out.println("Mas pruebas:");
+
+
+        // Crear de Empresa
+        Empresa empresa = new Empresa();
+        empresa.setNombre("Buen Sabor SRL");
+        empresa.setRazonSocial("30-71004555-9");
+        empresa.setCuil(305555555);
+        System.out.println("Empresa creada: " + empresa.getNombre());
+
+
+        //Crear una Promocion:
+
+        Promocion promocion = new Promocion();
+        promocion.setDenominacion("2x1 en empanadas");
+        promocion.setFechaDesde(LocalDate.now());
+        promocion.setFechaHasta(LocalDate.now().plusDays(7));
+        promocion.setPrecioPromocional(0.5); // 50% de descuento
+        System.out.println("Promoción: " + promocion.getDenominacion() +
+                " - Descuento: " + (promocion.getPrecioPromocional()*100) + "%");
+
+
+
+
+
+
+
     }
-}
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

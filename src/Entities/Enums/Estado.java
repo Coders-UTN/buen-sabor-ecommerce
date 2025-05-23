@@ -1,6 +1,6 @@
 package Entities.Enums;
 
-public enum Estado extends Base{
+public enum Estado{
     PREPARACION,
     PENDIENTE,
     CANCELADO,

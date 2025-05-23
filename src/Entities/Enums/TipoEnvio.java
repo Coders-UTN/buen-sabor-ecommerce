@@ -1,6 +1,6 @@
 package Entities.Enums;
 
-public enum TipoEnvio extends Base {
+public enum TipoEnvio {
     DELIVERY,
     TAKEAWAY
 }

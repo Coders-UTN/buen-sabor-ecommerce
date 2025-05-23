@@ -1,6 +1,6 @@
 package Entities.Enums;
 
-public enum FormaPago extends Base{
+public enum FormaPago{
     EFECTIVO,
     MERCADOPAGO
 }

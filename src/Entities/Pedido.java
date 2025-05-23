@@ -1,3 +1,12 @@
+package Entities;
+
+import Entities.Enums.Estado;
+import Entities.Enums.FormaPago;
+import Entities.Enums.TipoEnvio;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class Pedido extends Base {
     private LocalTime horaEstimadaFinalizacion;
     private double total;
@@ -7,24 +16,59 @@ public class Pedido extends Base {
     private FormaPago formaPago;
     private LocalDate fechaPedido;
 
-    public LocalTime getHoraEstimadaFinalizacion() { return horaEstimadaFinalizacion; }
-    public void setHoraEstimadaFinalizacion(LocalTime horaEstimadaFinalizacion) { this.horaEstimadaFinalizacion = horaEstimadaFinalizacion; }
+    public LocalTime getHoraEstimadaFinalizacion() {
+        return horaEstimadaFinalizacion;
+    }
 
-    public double getTotal() { return total; }
-    public void setTotal(double total) { this.total = total; }
+    public void setHoraEstimadaFinalizacion(LocalTime horaEstimadaFinalizacion) {
+        this.horaEstimadaFinalizacion = horaEstimadaFinalizacion;
+    }
 
-    public double getTotalCosto() { return totalCosto; }
-    public void setTotalCosto(double totalCosto) { this.totalCosto = totalCosto; }
+    public double getTotal() {
+        return total;
+    }
 
-    public Estado getEstado() { return estado; }
-    public void setEstado(Estado estado) { this.estado = estado; }
+    public void setTotal(double total) {
+        this.total = total;
+    }
 
-    public TipoEnvio getTipoEnvio() { return tipoEnvio; }
-    public void setTipoEnvio(TipoEnvio tipoEnvio) { this.tipoEnvio = tipoEnvio; }
+    public double getTotalCosto() {
+        return totalCosto;
+    }
 
-    public FormaPago getFormaPago() { return formaPago; }
-    public void setFormaPago(FormaPago formaPago) { this.formaPago = formaPago; }
+    public void setTotalCosto(double totalCosto) {
+        this.totalCosto = totalCosto;
+    }
 
-    public LocalDate getFechaPedido() { return fechaPedido; }
-    public void setFechaPedido(LocalDate fechaPedido) { this.fechaPedido = fechaPedido; }
+    public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
+
+    public TipoEnvio getTipoEnvio() {
+        return tipoEnvio;
+    }
+
+    public void setTipoEnvio(TipoEnvio tipoEnvio) {
+        this.tipoEnvio = tipoEnvio;
+    }
+
+    public FormaPago getFormaPago() {
+        return formaPago;
+    }
+
+    public void setFormaPago(FormaPago formaPago) {
+        this.formaPago = formaPago;
+    }
+
+    public LocalDate getFechaPedido() {
+        return fechaPedido;
+    }
+
+    public void setFechaPedido(LocalDate fechaPedido) {
+        this.fechaPedido = fechaPedido;
+    }
 }

@@ -13,6 +13,10 @@ public class ArticuloManufacturado extends Articulo{
         this.preparacion = preparacion;
     }
 
+    public ArticuloManufacturado() {
+
+    }
+
     public String getDescripcion() {
         return descripcion;
     }

@@ -4,97 +4,76 @@ import Entities.Enums.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
+
+        //Crear empresa y sucursal
+        Empresa miEmpresa = new Empresa("El Buen Sabor", "Alimentos SRL", 334567439);
+        Sucursal sucMendoza = new Sucursal("El Buen Sabor Suc MZA", LocalTime.of(11,00), LocalTime.of(23,00));
+        miEmpresa.agregarSucursal(sucMendoza);
+
         // Crear un cliente
-        Cliente cliente = new Cliente();
-        cliente.setNombre("Leandro");
-        cliente.setApellido("Flores");
+        Cliente cliente = new Cliente("Leandro", "Flores");
         cliente.setTelefono("2611234567");
         cliente.setEmail("leandro@mail.com");
         cliente.setFechaNacimiento(LocalDate.of(1998, 5, 23));
 
+        Usuario usuario = new Usuario("1234", "leaflores", cliente);
+
         // Crear un artículo manufacturado
-        ArticuloManufacturado pizza = new ArticuloManufacturado();
-        pizza.setDenominacion("Pizza Napolitana");
-        pizza.setPrecioVenta(3000);
-        pizza.setDescripcion("Pizza con tomate, ajo y albahaca");
-        pizza.setTiempoEstimadoMinutos(20);
-        pizza.setPreparacion("Cocinar en horno de barro");
+        ArticuloManufacturado pizza = new ArticuloManufacturado("Pizza Napolitana",  new UnidadDeMedida("U"), "Pizza con tomate, ajo y albahaca", 30, "Cocinar en horno de barro");
+        ArticuloInsumo coca = new ArticuloInsumo("Coca Cola 1.5Lts", new UnidadDeMedida("Unidad"), false, 2500);
+        ArticuloInsumo vino = new ArticuloInsumo("Vino La Estancia", new UnidadDeMedida("Unidad"), false, 5500 );
+        //Ingredientes usados
+        ArticuloInsumo harina = new ArticuloInsumo("Harina 000", new UnidadDeMedida("KG"), true, 3500.0);
+        ArticuloInsumo tomate = new ArticuloInsumo("Tomate", new UnidadDeMedida("KG"), true, 2000);
+        ArticuloInsumo ajo = new ArticuloInsumo("Ajo", new UnidadDeMedida("KG"), true, 2000);
+        ArticuloInsumo albahaca = new ArticuloInsumo("Albaca", new UnidadDeMedida("KG"), true, 1000);
 
-        // Crear un detalle de pedido
-        DetallePedido detalle = new DetallePedido();
-        detalle.setCantidad(2);
-        detalle.setSubTotal(pizza.getPrecioVenta() * detalle.getCantidad());
 
-        // Crear un pedido
-        Pedido pedido = new Pedido();
-        pedido.setFechaPedido(LocalDate.now());
-        pedido.setHoraEstimadaFinalizacion(LocalTime.of(13, 30));
-        pedido.setEstado(Estado.PENDIENTE);
-        pedido.setFormaPago(FormaPago.EFECTIVO);
-        pedido.setTipoEnvio(TipoEnvio.DELIVERY);
-        pedido.setTotal(detalle.getSubTotal());
-        pedido.setTotalCosto(detalle.getSubTotal() * 0.6); // ejemplo costo
+        //Agregar ArticuloManufacturadoDetalle a Pizza
+        pizza.agregarIngrediente(new ArticuloManufacturadoDetalle(harina, 0.3));
+        pizza.agregarIngrediente(new ArticuloManufacturadoDetalle(tomate, 0.2));
+        pizza.agregarIngrediente(new ArticuloManufacturadoDetalle(ajo, 0.1));
+        pizza.agregarIngrediente(new ArticuloManufacturadoDetalle(albahaca, 0.15));
+
+        //Crear una promocion
+        Promocion promocion = new Promocion("Vino La Estancia a $4000 la unidad", "Vinos La Estancia $4000 c/u (máximo 6 vinos por cliente)", TipoPromocion.PROMOCION_1);
+        promocion.setFechaDesde(LocalDate.now().minusDays(1));
+        promocion.setFechaHasta(LocalDate.now().plusDays(7));
+        promocion.setHoraDesde(LocalTime.of(0,0));
+        promocion.setHoraHasta(LocalTime.of(23,0));
+        promocion.setPrecioPromocional(5000); //
+        promocion.agregarArticuloPromocion(vino);
+
+        //Calcular precio de Venta
+        pizza.calcularPrecioVenta();
+        coca.calcularPrecioVenta();
+        vino.calcularPrecioVenta();
+
+        // Crear un pedido y mostrar detalles por consola
+        Pedido pedido = new Pedido(cliente, LocalDate.now(), FormaPago.MERCADOPAGO, TipoEnvio.DELIVERY, Estado.PENDIENTE, LocalTime.of(13, 30));
+        pedido.agregarDetallePedido(new DetallePedido(pizza, 2));
+        pedido.agregarDetallePedido(new DetallePedido(coca, 1));
+        pedido.agregarDetallePedido(new DetallePedido(vino, 1));
+        pedido.calcularTotal();
+        pedido.calcularTotalCosto();
+        pedido.mostrarPedido();
+
+        //agregar el pedido a la sucursal
+        sucMendoza.agregarPedido(pedido);
 
         // Crear una factura
-        Factura factura = new Factura();
-        factura.setFechaFacturacion(LocalDate.now());
-        factura.setFormaPago(FormaPago.EFECTIVO);
-        factura.setMpPaymentId(123456);
-        factura.setMpMerchantOrderId(78910);
-        factura.setMpPreferenceId("abc-123");
-        factura.setMpPaymentType("cash");
+        Factura factura = new Factura(pedido, LocalDate.now(), 123, 123, "122", "123", FormaPago.MERCADOPAGO);
         factura.setTotalVenta(pedido.getTotal());
 
-        // Mostrar todo por consola
-        System.out.println("Cliente: " + cliente.getNombre() + " " + cliente.getApellido());
-        System.out.println("Pedido: " + pedido.getFechaPedido() + " - Estado: " + pedido.getEstado());
-        System.out.println("Artículo: " + pizza.getDenominacion() + " - $" + pizza.getPrecioVenta());
-        System.out.println("Cantidad: " + detalle.getCantidad());
-        System.out.println("Total pedido: $" + pedido.getTotal());
-        System.out.println("Factura generada - Total venta: $" + factura.getTotalVenta());
-
-
-        System.out.println("-----------------------------------------------------------------------");
-
-
-        System.out.println("Mas pruebas:");
-
-
-        // Crear de Empresa
-        Empresa empresa = new Empresa();
-        empresa.setNombre("Buen Sabor SRL");
-        empresa.setRazonSocial("30-71004555-9");
-        empresa.setCuil(305555555);
-        System.out.println("Empresa creada: " + empresa.getNombre());
-
-
-        //Crear una Promocion:
-
-        Promocion promocion = new Promocion();
-        promocion.setDenominacion("2x1 en empanadas");
-        promocion.setFechaDesde(LocalDate.now());
-        promocion.setFechaHasta(LocalDate.now().plusDays(7));
-        promocion.setPrecioPromocional(0.5); // 50% de descuento
-        System.out.println("Promoción: " + promocion.getDenominacion() +
-                " - Descuento: " + (promocion.getPrecioPromocional()*100) + "%");
-
-
-
 
 
 
 
     }
-
-
-
-
-    }
+}
 
 
 

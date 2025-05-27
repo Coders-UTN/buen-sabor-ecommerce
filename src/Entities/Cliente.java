@@ -10,6 +10,13 @@ public class Cliente extends Base {
     private String telefono;
     private String email;
     private LocalDate fechaNacimiento;
+    private Domicilio domicilio;
+    private Imagen imagen;
+
+    public Cliente(String nombre, String apellido) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+    }
 
     public String getNombre() { return nombre; }
     public void setNombre(String nombre) { this.nombre = nombre; }
@@ -25,4 +32,10 @@ public class Cliente extends Base {
 
     public LocalDate getFechaNacimiento() { return fechaNacimiento; }
     public void setFechaNacimiento(LocalDate fechaNacimiento) { this.fechaNacimiento = fechaNacimiento; }
+
+    public Domicilio getDomicilio() { return domicilio; }
+    public void setDomicilio(Domicilio domicilio) { this.domicilio = domicilio; }
+
+    public Imagen getImagen() { return imagen; }
+    public void setImagen(Imagen imagen) { this.imagen = imagen; }
 }

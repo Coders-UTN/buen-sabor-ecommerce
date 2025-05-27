@@ -5,6 +5,7 @@ import Entities.Enums.FormaPago;
 import java.time.LocalDate;
 
 public class Factura extends Base {
+    private Pedido pedido;
     private LocalDate fechaFacturacion;
     private int mpPaymentId;
     private int mpMerchantOrderId;
@@ -12,6 +13,18 @@ public class Factura extends Base {
     private String mpPaymentType;
     private FormaPago formaPago;
     private double totalVenta;
+
+    public Factura(Pedido pedido, LocalDate fechaFacturacion, int mpPaymentId, int mpMerchantOrderId, String mpPreferenceId, String mpPaymentType, FormaPago formaPago) {
+        this.pedido = pedido;
+        this.fechaFacturacion = fechaFacturacion;
+        this.mpPaymentId = mpPaymentId;
+        this.mpMerchantOrderId = mpMerchantOrderId;
+        this.mpPreferenceId = mpPreferenceId;
+        this.mpPaymentType = mpPaymentType;
+        this.formaPago = formaPago;
+    }
+
+
 
     public LocalDate getFechaFacturacion() {
         return fechaFacturacion;

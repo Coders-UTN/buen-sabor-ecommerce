@@ -1,10 +1,13 @@
 package Entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Empresa extends Base{
     private String nombre;
     private String razonSocial;
     private int cuil;
-    private Sucursal sucursal;
+    private Set<Sucursal> sucursales;
 
     public Empresa() {
     }
@@ -12,6 +15,7 @@ public class Empresa extends Base{
         this.nombre = nombre;
         this.razonSocial = razonSocial;
         this.cuil = cuil;
+        this.sucursales = new HashSet<>();
     }
 
     public int getCuil() {
@@ -38,11 +42,16 @@ public class Empresa extends Base{
         this.cuil = cuil;
     }
 
-    public Sucursal getSucursal() {
-        return sucursal;
+    public Set<Sucursal> getSucursales() {
+        return sucursales;
     }
 
-    public void setSucursal(Sucursal sucursal) {
-        this.sucursal = sucursal;
+    public void setSucursales(Set<Sucursal> sucursales) {
+        this.sucursales = sucursales;
+    }
+
+    public void agregarSucursal(Sucursal sucursal){
+        this.sucursales.add(sucursal);
+        System.out.println("Sucursal " + sucursal.getNombre() + " agregada");
     }
 }

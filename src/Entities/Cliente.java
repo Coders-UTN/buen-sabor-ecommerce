@@ -12,6 +12,7 @@ public class Cliente extends Base {
     private LocalDate fechaNacimiento;
     private Domicilio domicilio;
     private Imagen imagen;
+    private Usuario usuario;
 
     public Cliente(String nombre, String apellido) {
         this.nombre = nombre;

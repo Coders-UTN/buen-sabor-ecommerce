@@ -1,29 +1,34 @@
 package Entities;
 
 public class ArticuloManufacturadoDetalle extends Base {
-    private int cantidad;
-    private Articulo articulo;
+    private ArticuloInsumo articulo;
+    private double cantidad;
 
     public ArticuloManufacturadoDetalle() {
     }
 
-    public ArticuloManufacturadoDetalle(int cantidad) {
+    public ArticuloManufacturadoDetalle(ArticuloInsumo articulo, double cantidad) {
+        this.articulo = articulo;
         this.cantidad = cantidad;
     }
 
-    public int getCantidad() {
+    public double getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(int cantidad) {
+    public void setCantidad(double cantidad) {
         this.cantidad = cantidad;
     }
 
-    public Articulo getArticulo() {
+    public ArticuloInsumo getArticulo() {
         return articulo;
     }
 
-    public void setArticulo(Articulo articulo) {
+    public void setArticulo(ArticuloInsumo articulo) {
         this.articulo = articulo;
+    }
+
+    public double calcularCosto(){
+        return (double) cantidad * articulo.getPrecioCompra();
     }
 }

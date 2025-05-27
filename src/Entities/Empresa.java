@@ -7,7 +7,7 @@ public class Empresa extends Base{
     private String nombre;
     private String razonSocial;
     private int cuil;
-    private Set<Sucursal> sucursales;
+    private Set<Sucursal> sucursales = new HashSet<>();
 
     public Empresa() {
     }
@@ -15,7 +15,6 @@ public class Empresa extends Base{
         this.nombre = nombre;
         this.razonSocial = razonSocial;
         this.cuil = cuil;
-        this.sucursales = new HashSet<>();
     }
 
     public int getCuil() {

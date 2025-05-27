@@ -18,7 +18,7 @@ public class Promocion extends Base{
     private double precioPromocional;
     private TipoPromocion tipoPromocion;
     private Set<Imagen> imagenes;
-    private Set<Articulo> articulosEnPromocion;
+    private Set<Articulo> articulosEnPromocion = new HashSet<>();
 
     public Promocion() {
     }
@@ -28,7 +28,6 @@ public class Promocion extends Base{
         this.descripcionDescuento = descripcion;
         this.tipoPromocion = tipoPromocion;
         this.articulosEnPromocion = new HashSet<>();
-        this.imagenes = new HashSet<>();
     }
 
     public String getDenominacion() {

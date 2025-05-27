@@ -7,8 +7,16 @@ import java.util.Set;
 public abstract class Articulo extends Base{
     protected String denominacion;
     protected double precioVenta;
-    protected Set<Promocion> promociones;
-    protected Set<UnidadMedida> unidadesMedidas;
+    protected UnidadDeMedida unidadDeMedida;
+    private Promocion promocion;
+
+    public Articulo() {
+    }
+
+    public Articulo(String denominacion, UnidadDeMedida unidadDeMedida) {
+        this.denominacion = denominacion;
+        this.unidadDeMedida = unidadDeMedida;
+    }
 
     public String getDenominacion() {
         return denominacion;
@@ -19,34 +27,41 @@ public abstract class Articulo extends Base{
     }
 
     public double getPrecioVenta() {
-        return precioVenta;
+        return this.precioVenta;
     }
 
     public void setPrecioVenta(double precioVenta) {
         this.precioVenta = precioVenta;
     }
 
-    public Set<Promocion> getPromociones() {
-        return promociones;
+    public UnidadDeMedida getUnidadDeMedida() {
+        return unidadDeMedida;
     }
 
-    public void setPromociones(Set<Promocion> promociones) {
-        this.promociones = promociones;
+    public void setUnidadDeMedida(UnidadDeMedida unidadDeMedida) {
+        this.unidadDeMedida = unidadDeMedida;
     }
-
-    public Set<UnidadMedida> getUnidadesMedidas() {
-        return unidadesMedidas;
-    }
-
-    public void setUnidadesMedidas(Set<UnidadMedida> unidadesMedidas) {
-        this.unidadesMedidas = unidadesMedidas;
-    }
-
     public void agregarPromocion(Promocion promocion){
-        this.promociones.add(promocion);
+        this.promocion = promocion;
     }
 
-    public void agregarUnidadMedida(UnidadMedida unidad) {
-        this.unidadesMedidas.add(unidad);
+    public abstract void calcularPrecioVenta();
+
+    public Promocion getPromocion() {
+        return promocion;
     }
+
+    public void setPromocion(Promocion promocion) {
+        this.promocion = promocion;
+    }
+
+    public double aplicarPromocion(){
+        if (promocion != null && promocion.estaVigente()){
+            return promocion.getPrecioPromocional();
+        } else {
+            return precioVenta;
+        }
+    }
+
+    public abstract double calcularCostoTotal();
 }

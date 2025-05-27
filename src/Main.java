@@ -19,7 +19,7 @@ public class Main {
         cliente.setEmail("leandro@mail.com");
         cliente.setFechaNacimiento(LocalDate.of(1998, 5, 23));
 
-        Usuario usuario = new Usuario("1234", "leaflores", cliente);
+        Usuario usuario = new Usuario("1234", "leaflores");
 
         // Crear un artículo manufacturado
         ArticuloManufacturado pizza = new ArticuloManufacturado("Pizza Napolitana",  new UnidadDeMedida("U"), "Pizza con tomate, ajo y albahaca", 30, "Cocinar en horno de barro");

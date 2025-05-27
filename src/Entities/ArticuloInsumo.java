@@ -7,8 +7,27 @@ public class ArticuloInsumo extends Articulo {
     private int stockActual;
     private int stockMaximo;
     private boolean esParaElaborar;
-    private Set<ArticuloManufacturadoDetalle> listaArticuloDetalle;
+    private static final double PORCENTAJE_GANANCIA = 0.3;
 
+    public ArticuloInsumo(String denominacion, UnidadDeMedida unidadDeMedida, boolean esParaElaborar, double precioCompra) {
+        super(denominacion, unidadDeMedida);
+        this.esParaElaborar = esParaElaborar;
+        this.precioCompra = precioCompra;
+        calcularPrecioVenta();
+    }
+
+    public ArticuloInsumo() {
+    }
+
+    @Override
+    public void calcularPrecioVenta() {
+        this.precioVenta = precioCompra + (precioCompra * PORCENTAJE_GANANCIA);
+    }
+
+    @Override
+    public double calcularCostoTotal() {
+        return precioCompra;
+    }
 
     public double getPrecioCompra() {
         return precioCompra;
@@ -42,15 +61,4 @@ public class ArticuloInsumo extends Articulo {
         this.esParaElaborar = esParaElaborar;
     }
 
-    public Set<ArticuloManufacturadoDetalle> getListaArticuloDetalle() {
-        return listaArticuloDetalle;
-    }
-
-    public void setListaArticuloDetalle(Set<ArticuloManufacturadoDetalle> listaArticuloDetalle) {
-        this.listaArticuloDetalle = listaArticuloDetalle;
-    }
-
-    public void agregarArticuloDetalle(ArticuloManufacturadoDetalle detalle) {
-        this.listaArticuloDetalle.add(detalle);
-    }
 }

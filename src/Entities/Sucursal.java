@@ -8,8 +8,10 @@ public class Sucursal extends Base{
     private String nombre;
     private LocalTime horarioApertura;
     private LocalTime horarioCierre;
-    private Set<Empresa> listaEmpresas;
+    private Empresa empresa;
     private Set<Promocion> listaPromociones;
+    private Set<Pedido> listaPedidos;
+    private Categoria categoria;
 
     public Sucursal() {
     }
@@ -18,12 +20,32 @@ public class Sucursal extends Base{
         this.nombre = nombre;
         this.horarioApertura = horarioApertura;
         this.horarioCierre = horarioCierre;
-        this.listaEmpresas = new HashSet<>();
         this.listaPromociones = new HashSet<>();
+        this.listaPedidos = new HashSet<>();
     }
-    public void agregarEmpresa(Empresa empresa) {
-        this.listaEmpresas.add(empresa);
-        System.out.println("Empresa agregada: " + empresa.getNombre());
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public Set<Pedido> getListaPedidos() {
+        return listaPedidos;
+    }
+
+    public void setListaPedidos(Set<Pedido> listaPedidos) {
+        this.listaPedidos = listaPedidos;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public String getNombre() {
@@ -50,14 +72,6 @@ public class Sucursal extends Base{
         this.horarioCierre = horarioCierre;
     }
 
-    public Set<Empresa> getListaEmpresas() {
-        return listaEmpresas;
-    }
-
-    public void setListaEmpresas(Set<Empresa> listaEmpresas) {
-        this.listaEmpresas = listaEmpresas;
-    }
-
     public Set<Promocion> getListaPromociones() {
         return listaPromociones;
     }
@@ -65,4 +79,22 @@ public class Sucursal extends Base{
     public void setListaPromociones(Set<Promocion> listaPromociones) {
         this.listaPromociones = listaPromociones;
     }
+
+    public void agregarPromocion(Promocion promocion){
+        this.listaPromociones.add(promocion);
+        System.out.println("Promocion " + promocion.getDenominacion() + " agregada");
+    }
+
+    public void eliminarPromocion(Promocion promocion){
+        if (this.listaPromociones.remove(promocion)) {
+            System.out.println("Promocion " + promocion.getDenominacion() + " eliminada");
+        } else {
+            System.out.println("La promocion no se encuentra en la lista");
+        }
+    }
+
+    public void agregarPedido(Pedido pedido){
+        this.listaPedidos.add(pedido);
+    }
+
 }

@@ -1,6 +1,8 @@
 package Entities;
 
 import Entities.Enums.TipoPromocion;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -8,6 +10,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Promocion extends Base{
     private String denominacion;
     private LocalDate fechaDesde;
@@ -17,99 +24,15 @@ public class Promocion extends Base{
     private String descripcionDescuento;
     private double precioPromocional;
     private TipoPromocion tipoPromocion;
-    private Set<Imagen> imagenes;
+    @Builder.Default
+    private Set<Imagen> imagenes = new HashSet<>();
+    @Builder.Default
     private Set<Articulo> articulosEnPromocion = new HashSet<>();
 
-    public Promocion() {
-    }
-
-    public Promocion(String denominacion, String descripcion, TipoPromocion tipoPromocion) {
-        this.denominacion = denominacion;
-        this.descripcionDescuento = descripcion;
-        this.tipoPromocion = tipoPromocion;
-        this.articulosEnPromocion = new HashSet<>();
-    }
-
-    public String getDenominacion() {
-        return denominacion;
-    }
-
-    public void setDenominacion(String denominacion) {
-        this.denominacion = denominacion;
-    }
-
-    public LocalDate getFechaDesde() {
-        return fechaDesde;
-    }
-
-    public void setFechaDesde(LocalDate fechaDesde) {
-        this.fechaDesde = fechaDesde;
-    }
-
-    public LocalDate getFechaHasta() {
-        return fechaHasta;
-    }
-
-    public void setFechaHasta(LocalDate fechaHasta) {
-        this.fechaHasta = fechaHasta;
-    }
-
-    public LocalTime getHoraDesde() {
-        return horaDesde;
-    }
-
-    public void setHoraDesde(LocalTime horaDesde) {
-        this.horaDesde = horaDesde;
-    }
-
-    public LocalTime getHoraHasta() {
-        return horaHasta;
-    }
-
-    public void setHoraHasta(LocalTime horaHasta) {
-        this.horaHasta = horaHasta;
-    }
-
-    public String getDescripcion() { return descripcionDescuento; }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcionDescuento = descripcion;
-    }
-
-    public double getPrecioPromocional() {
-        return precioPromocional;
-    }
-
-    public void setPrecioPromocional(double precioPromocional) {
-        this.precioPromocional = precioPromocional;
-    }
-
-    public TipoPromocion getTipoPromocion() {
-        return tipoPromocion;
-    }
-
-    public void setTipoPromocion(TipoPromocion tipoPromocion) {
-        this.tipoPromocion = tipoPromocion;
-    }
-
-    public Set<Imagen> getImagenes() {
-        return imagenes;
-    }
-
-    public void setImagenes(Set<Imagen> imagenes) {
-        this.imagenes = imagenes;
-    }
-
-    public Set<Articulo> getArticulosEnPromocion() {
-        return articulosEnPromocion;
-    }
-
-    public void setArticulosEnPromocion(Set<Articulo> articulosEnPromocion) {
-        this.articulosEnPromocion = articulosEnPromocion;
-    }
-    public void agregarArticuloPromocion(Articulo articulo){
-        this.articulosEnPromocion.add(articulo);
-        articulo.agregarPromocion(this);
+    public void agregarArticuloPromocion(Articulo... articulos){
+        for (Articulo articulo : articulos) {
+            this.articulosEnPromocion.add(articulo);
+        }
     }
 
     public void eliminarArticuloPromocion(Articulo articulo){
@@ -143,5 +66,9 @@ public class Promocion extends Base{
                 (horaHoy.equals(fechaHasta) || horaHoy.isBefore(horaHasta));
 
         return esValidaPorFecha && esValidaPorHora;
+    }
+
+    public boolean contieneArticulo(Articulo articulo){
+        return articulosEnPromocion.contains(articulo);
     }
 }

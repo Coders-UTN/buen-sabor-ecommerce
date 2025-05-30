@@ -1,52 +1,30 @@
 package Entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+
 import java.util.HashSet;
 import java.util.Set;
 
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Empresa extends Base{
     private String nombre;
     private String razonSocial;
     private int cuil;
     private Set<Sucursal> sucursales = new HashSet<>();
 
-    public Empresa() {
-    }
     public Empresa(String nombre, String razonSocial, int cuil) {
         this.nombre = nombre;
         this.razonSocial = razonSocial;
         this.cuil = cuil;
-    }
-
-    public int getCuil() {
-        return cuil;
-    }
-
-    public String getRazonSocial() {
-        return razonSocial;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setRazonSocial(String razonSocial) {
-        this.razonSocial = razonSocial;
-    }
-
-    public void setCuil(int cuil) {
-        this.cuil = cuil;
-    }
-
-    public Set<Sucursal> getSucursales() {
-        return sucursales;
-    }
-
-    public void setSucursales(Set<Sucursal> sucursales) {
-        this.sucursales = sucursales;
+        this.sucursales = new HashSet<>();
     }
 
     public void agregarSucursal(Sucursal sucursal){

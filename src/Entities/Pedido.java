@@ -3,12 +3,19 @@ package Entities;
 import Entities.Enums.Estado;
 import Entities.Enums.FormaPago;
 import Entities.Enums.TipoEnvio;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Pedido extends Base {
     private Cliente cliente;
     private LocalTime horaEstimadaFinalizacion;
@@ -18,79 +25,22 @@ public class Pedido extends Base {
     private TipoEnvio tipoEnvio;
     private FormaPago formaPago;
     private LocalDate fechaPedido;
-    private Set<DetallePedido> detallesDelPedido;
+    @Builder.Default
+    private Set<DetallePedido> detallesDelPedido = new HashSet<>();
     private static double PRECIO_BASE_ENVIO = 900;
     private static double COSTO_MERCADO_PAGO = 0.05;
 
-    public Pedido(Cliente cliente,LocalDate fechaPedido, FormaPago formaPago, TipoEnvio tipoEnvio, Estado estado, LocalTime horaEstimadaFinalizacion) {
-        this.cliente = cliente;
-        this.fechaPedido = fechaPedido;
-        this.formaPago = formaPago;
-        this.tipoEnvio = tipoEnvio;
-        this.estado = estado;
-        this.horaEstimadaFinalizacion = horaEstimadaFinalizacion;
-        this.detallesDelPedido = new HashSet<>();
-    }
-
-    public Pedido() {
-    }
-
-    public LocalTime getHoraEstimadaFinalizacion() {
-        return horaEstimadaFinalizacion;
-    }
-
-    public void setHoraEstimadaFinalizacion(LocalTime horaEstimadaFinalizacion) {
-        this.horaEstimadaFinalizacion = horaEstimadaFinalizacion;
-    }
-
-    public double getTotal() {
-        return total;
-    }
-
-    public double getTotalCosto() {
-        return totalCosto;
-    }
-
-    public Estado getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
-
-    public TipoEnvio getTipoEnvio() {
-        return tipoEnvio;
-    }
-
-    public void setTipoEnvio(TipoEnvio tipoEnvio) {
-        this.tipoEnvio = tipoEnvio;
-    }
-
-    public FormaPago getFormaPago() {
-        return formaPago;
-    }
-
-    public void setFormaPago(FormaPago formaPago) {
-        this.formaPago = formaPago;
-    }
-
-    public LocalDate getFechaPedido() {
-        return fechaPedido;
-    }
-
-    public void setFechaPedido(LocalDate fechaPedido) {
-        this.fechaPedido = fechaPedido;
-    }
-
-    public void agregarDetallePedido(DetallePedido nuevoDetalle) {
-        this.detallesDelPedido.add(nuevoDetalle);
+    public void agregarDetallePedido(DetallePedido... nuevosDetalles) {
+        for (DetallePedido detalle : nuevosDetalles) {
+            detalle.generarCostoVenta();
+        this.detallesDelPedido.add(detalle);
+        }
     }
 
     public void calcularTotal(){
         double total = 0.0;
         for (DetallePedido detalle : detallesDelPedido) {
-            total += detalle.calcularSubtotal();
+            total += detalle.getSubTotal();
         }
         total += calcularCostoEnvio() + calcularComisionMP();
         this.total = total;
@@ -118,6 +68,12 @@ public class Pedido extends Base {
         return 0.0;
     }
 
+    public void calcularPreciosConPromo(Set<Promocion> promociones){
+        for (DetallePedido detalle : detallesDelPedido){
+            detalle.calcularPrecioUnitarioEnPromocion(promociones);
+        }
+    }
+
     public void mostrarPedido(){
         System.out.println("-------------------------------------------------");
         System.out.println("Pedido Cliente: " + this.cliente.getApellido() + " " + this.cliente.getNombre() + "\n" +
@@ -125,11 +81,12 @@ public class Pedido extends Base {
                 "Medio de pago: " + this.formaPago.name() + "\n" +
                 "Detalle:" );
         for (DetallePedido detalle : this.detallesDelPedido) {
-            System.out.println(detalle.getDetalle());
+            System.out.println(detalle.getDenominacionDetalle()+ "         $" + detalle.getPrecioUnitario() + "        Cantidad " + detalle.getCantidad() + "        Subtotal $" + detalle.getSubTotal());
+
         }
         System.out.println("Envio          $" + calcularCostoEnvio());
         System.out.println("Comision MP    $" + calcularComisionMP() +
-                "\nTotal costo    $" + this.totalCosto +
+                "\nTotal costo    $" + this.totalCosto + "***Notacion para control***" +
                 "\nTotal          $" + this.total);
         System.out.println("-------------------------------------------------");
     }

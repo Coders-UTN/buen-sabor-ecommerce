@@ -1,9 +1,19 @@
 package Entities;
 
 import Entities.Enums.FormaPago;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Factura extends Base {
     private Pedido pedido;
     private LocalDate fechaFacturacion;
@@ -22,63 +32,5 @@ public class Factura extends Base {
         this.mpPreferenceId = mpPreferenceId;
         this.mpPaymentType = mpPaymentType;
         this.formaPago = formaPago;
-    }
-
-
-
-    public LocalDate getFechaFacturacion() {
-        return fechaFacturacion;
-    }
-
-    public void setFechaFacturacion(LocalDate fechaFacturacion) {
-        this.fechaFacturacion = fechaFacturacion;
-    }
-
-    public int getMpPaymentId() {
-        return mpPaymentId;
-    }
-
-    public void setMpPaymentId(int mpPaymentId) {
-        this.mpPaymentId = mpPaymentId;
-    }
-
-    public int getMpMerchantOrderId() {
-        return mpMerchantOrderId;
-    }
-
-    public void setMpMerchantOrderId(int mpMerchantOrderId) {
-        this.mpMerchantOrderId = mpMerchantOrderId;
-    }
-
-    public String getMpPreferenceId() {
-        return mpPreferenceId;
-    }
-
-    public void setMpPreferenceId(String mpPreferenceId) {
-        this.mpPreferenceId = mpPreferenceId;
-    }
-
-    public String getMpPaymentType() {
-        return mpPaymentType;
-    }
-
-    public void setMpPaymentType(String mpPaymentType) {
-        this.mpPaymentType = mpPaymentType;
-    }
-
-    public FormaPago getFormaPago() {
-        return formaPago;
-    }
-
-    public void setFormaPago(FormaPago formaPago) {
-        this.formaPago = formaPago;
-    }
-
-    public double getTotalVenta() {
-        return totalVenta;
-    }
-
-    public void setTotalVenta(double totalVenta) {
-        this.totalVenta = totalVenta;
     }
 }

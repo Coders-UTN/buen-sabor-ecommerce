@@ -1,6 +1,18 @@
 package Entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+
 import java.util.Set;
+
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 
 public class ArticuloInsumo extends Articulo {
     private double precioCompra;
@@ -8,16 +20,6 @@ public class ArticuloInsumo extends Articulo {
     private int stockMaximo;
     private boolean esParaElaborar;
     private static final double PORCENTAJE_GANANCIA = 0.3;
-
-    public ArticuloInsumo(String denominacion, UnidadDeMedida unidadDeMedida, boolean esParaElaborar, double precioCompra) {
-        super(denominacion, unidadDeMedida);
-        this.esParaElaborar = esParaElaborar;
-        this.precioCompra = precioCompra;
-        calcularPrecioVenta();
-    }
-
-    public ArticuloInsumo() {
-    }
 
     @Override
     public void calcularPrecioVenta() {
@@ -28,37 +30,4 @@ public class ArticuloInsumo extends Articulo {
     public double calcularCostoTotal() {
         return precioCompra;
     }
-
-    public double getPrecioCompra() {
-        return precioCompra;
-    }
-
-    public void setPrecioCompra(double precioCompra) {
-        this.precioCompra = precioCompra;
-    }
-
-    public int getStockActual() {
-        return stockActual;
-    }
-
-    public void setStockActual(int stockActual) {
-        this.stockActual = stockActual;
-    }
-
-    public int getStockMaximo() {
-        return stockMaximo;
-    }
-
-    public void setStockMaximo(int stockMaximo) {
-        this.stockMaximo = stockMaximo;
-    }
-
-    public boolean isEsParaElaborar() {
-        return esParaElaborar;
-    }
-
-    public void setEsParaElaborar(boolean esParaElaborar) {
-        this.esParaElaborar = esParaElaborar;
-    }
-
 }

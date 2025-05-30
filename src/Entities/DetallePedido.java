@@ -1,52 +1,49 @@
 package Entities;
 
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+
+import java.util.Set;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class DetallePedido extends Base {
     private int cantidad;
-    private double subTotal;
     private Articulo articulo;
+    private double precioUnitario;
+    private double subTotal;
 
-    public DetallePedido(Articulo articulo, int cantidad) {
-        this.cantidad = cantidad;
+    public DetallePedido(Articulo articulo, int cantidad){
         this.articulo = articulo;
-        this.subTotal = calcularSubtotal();
-    }
-
-    public DetallePedido() {
-    }
-
-    public int getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
-    }
-
-    public double getSubTotal() {
-        return subTotal;
-    }
-
-    public Articulo getArticulo() {
-        return articulo;
-    }
-
-    public double calcularSubtotal(){
-        if (articulo.getPromocion() == null) {
-            return articulo.getPrecioVenta() * cantidad;
-        } else {
-            return articulo.aplicarPromocion() * cantidad;
-        }
     }
 
     public double calcularCosto(){
         return articulo.calcularCostoTotal();
     }
 
-    public void setArticulo(Articulo articulo) {
-        this.articulo = articulo;
+    private void calcularSubtotal(){
+        this.subTotal = precioUnitario * cantidad;
     }
 
-    public String getDetalle(){
-        return this.articulo.getDenominacion() + "         $" + this.articulo.getPrecioVenta() + "        Cantidad " + this.cantidad + "        Subtotal $" + this.getSubTotal();
+    public void calcularPrecioUnitarioEnPromocion(Set<Promocion> promociones){
+        double precioFinal = articulo.getPrecioVenta();
+        for (Promocion promocion : promociones){
+            if (promocion.estaVigente() && promocion.contieneArticulo(articulo)){
+               precioFinal = promocion.getPrecioPromocional();
+            }
+        }
+        this.precioUnitario = precioFinal;
+        calcularSubtotal();
+    }
+
+    public String getDenominacionDetalle(){
+        return articulo.getDenominacion();
+    }
+
+    public void generarCostoVenta() {
+        articulo.calcularPrecioVenta();
     }
 }

@@ -16,6 +16,7 @@ import java.util.Set;
 public class Categoria {
     private String denominacion;
     private Set<Categoria> subcategorias = new HashSet<>();
+    private Set<Articulo> articulos = new HashSet();
 
     public void quitarSubcategoria(Categoria subcategoria){
         if (this.subcategorias.remove(subcategoria)) {
@@ -23,5 +24,9 @@ public class Categoria {
         } else {
             System.out.println("La subcategoria no existe en la categoria padre");
         }
+    }
+
+    public void agregarArticuli(Articulo articulo){
+        this.articulos.add(articulo);
     }
 }

@@ -20,11 +20,16 @@ public class Sucursal extends Base{
     private Set<Promocion> listaPromociones = new HashSet<>();
     @Builder.Default
     private Set<Pedido> listaPedidos = new HashSet<>();
-    private Categoria categoria;
+    private set<Categoria> categorias = new HashSet<>();
+    private Domicilio domicilio;
 
     public void agregarPromocion(Promocion promocion){
         this.listaPromociones.add(promocion);
         System.out.println("Promocion " + promocion.getDenominacion() + " agregada");
+    }
+
+    public void agregarCategorias(Categoria categoria){
+        this.categorias.add(categoria);
     }
 
     public void eliminarPromocion(Promocion promocion){

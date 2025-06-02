@@ -19,10 +19,15 @@ public abstract class Articulo extends Base{
     protected String denominacion;
     protected double precioVenta;
     protected UnidadDeMedida unidadDeMedida;
+    private Set<Imagen> imagenes = new HashSet();
 
     public Articulo(String denominacion, UnidadDeMedida unidadDeMedida) {
         this.denominacion = denominacion;
         this.unidadDeMedida = unidadDeMedida;
+    }
+
+    public void agregarImagen(Imagen imagen){
+        this.imagenes.add(imagen);
     }
 
     public abstract void calcularPrecioVenta();

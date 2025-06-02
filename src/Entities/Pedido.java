@@ -29,6 +29,9 @@ public class Pedido extends Base {
     private Set<DetallePedido> detallesDelPedido = new HashSet<>();
     private static double PRECIO_BASE_ENVIO = 900;
     private static double COSTO_MERCADO_PAGO = 0.05;
+    private Factura factura;
+    private Sucursal sucursal;
+    private Domicilio domicilio;
 
     public void agregarDetallePedido(DetallePedido... nuevosDetalles) {
         for (DetallePedido detalle : nuevosDetalles) {

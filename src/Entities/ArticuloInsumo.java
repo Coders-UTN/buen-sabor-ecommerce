@@ -16,8 +16,8 @@ import java.util.Set;
 
 public class ArticuloInsumo extends Articulo {
     private double precioCompra;
-    private int stockActual;
-    private int stockMaximo;
+    private Integer stockActual;
+    private Integer stockMaximo;
     private boolean esParaElaborar;
     private static final double PORCENTAJE_GANANCIA = 0.3;
 

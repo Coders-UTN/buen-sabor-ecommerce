@@ -23,9 +23,9 @@ public class Cliente extends Base {
     private LocalDate fechaNacimiento;
     private Domicilio domicilio;
     private Imagen imagen;
+    private Set<Pedido> pedidos = new HashSet();
 
-    public Cliente(String nombre, String apellido) {
-        this.nombre = nombre;
-        this.apellido = apellido;
+    public void agregarPedido(Pedido pedido){
+        this.pedidos.add(pedido);
     }
 }

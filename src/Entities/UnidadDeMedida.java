@@ -13,5 +13,4 @@ import lombok.experimental.SuperBuilder;
 @Setter
 public class UnidadDeMedida {
     private String denominacion;
-
 }

@@ -17,15 +17,8 @@ import java.util.Set;
 public class Empresa extends Base{
     private String nombre;
     private String razonSocial;
-    private int cuil;
+    private Integer cuil;
     private Set<Sucursal> sucursales = new HashSet<>();
-
-    public Empresa(String nombre, String razonSocial, int cuil) {
-        this.nombre = nombre;
-        this.razonSocial = razonSocial;
-        this.cuil = cuil;
-        this.sucursales = new HashSet<>();
-    }
 
     public void agregarSucursal(Sucursal sucursal){
         this.sucursales.add(sucursal);

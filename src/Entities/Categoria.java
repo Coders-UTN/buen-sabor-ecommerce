@@ -19,15 +19,30 @@ public class Categoria {
     private Set<Categoria> subcategorias = new HashSet<>();
     private Set<Articulo> articulos = new HashSet();
 
+    public void agregarSubcategoria(Categoria categoria){
+        this.subcategorias.add(categoria);
+        categoria.setCategoriaPadre(this);
+    }
+
     public void quitarSubcategoria(Categoria subcategoria){
         if (this.subcategorias.remove(subcategoria)) {
+            subcategoria.setCategoriaPadre(null);
             System.out.println("Subcategoria " + subcategoria.getDenominacion() + " eliminada");
         } else {
             System.out.println("La subcategoria no existe en la categoria padre");
         }
     }
 
-    public void agregarArticuli(Articulo articulo){
+    public void agregarArticulo(Articulo articulo){
         this.articulos.add(articulo);
+    }
+
+    public void quitarArticulo(Articulo articulo) {
+        if (this.articulos.remove(articulo)) {
+            System.out.println("Articulo " + articulo.getDenominacion() + " eliminado");
+        } else {
+            System.out.println("No se encontro el articulo");
+        }
+
     }
 }

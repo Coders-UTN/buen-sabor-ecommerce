@@ -15,6 +15,7 @@ import java.util.Set;
 @Setter
 public class Categoria {
     private String denominacion;
+    private Categoria categoriaPadre;
     private Set<Categoria> subcategorias = new HashSet<>();
     private Set<Articulo> articulos = new HashSet();
 

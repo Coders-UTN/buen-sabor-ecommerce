@@ -12,6 +12,6 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 public abstract class Base {
-    private int id;
+    private long id;
 
 }

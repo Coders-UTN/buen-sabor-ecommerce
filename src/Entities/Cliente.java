@@ -8,6 +8,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @SuperBuilder
@@ -24,6 +25,7 @@ public class Cliente extends Base {
     private Domicilio domicilio;
     private Imagen imagen;
     private Set<Pedido> pedidos = new HashSet();
+    private Usuario usuario;
 
     public void agregarPedido(Pedido pedido){
         this.pedidos.add(pedido);
